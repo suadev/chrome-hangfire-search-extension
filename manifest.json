@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Hangfire Search",
+  "short_name": "Hangfire Search",
+  "description": "Hangfire Dashboard Search Extension",
+  "version": "1.0",
+  "permissions": [
+    "http://localhost:5018/*"
+  ],
+  "background": {
+    "scripts": [
+      "assets/js/background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    // "128": "assets/img/icon128.png"
+  },
+  "homepage_url": "http://github.com/suadev",
+  "browser_action": {
+    "default_title": "Hangfire Search"
+    // "default_icon": "assets/img/icon128.png"
+  }
+}

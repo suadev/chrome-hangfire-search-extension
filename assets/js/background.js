@@ -1,0 +1,12 @@
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    if (changeInfo.status !== 'loading')
+        return;
+
+    chrome.tabs.executeScript(null, {
+        file: "assets/js/jquery.min.js"
+    }, function () {
+        chrome.tabs.executeScript(null, {
+            file: "assets/js/search.js"
+        });
+    });
+});
