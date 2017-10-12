@@ -9,4 +9,5 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             file: "assets/js/search.js"
         });
     });
+    chrome.tabs.insertCSS(null, {file:"assets/css/styles.css"})
 });

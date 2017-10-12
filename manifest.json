@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "Hangfire Search",
-  "short_name": "Hangfire Search",
+  "name": "Hangfire Job Filter",
+  "short_name": "Hangfire Job Filter",
   "description": "Hangfire Dashboard Search Extension",
   "version": "1.0",
   "permissions": [
-    "http://localhost:5018/*"
+    "http://localhost/*"
   ],
   "background": {
     "scripts": [
@@ -18,7 +18,10 @@
   },
   "homepage_url": "http://github.com/suadev",
   "browser_action": {
-    "default_title": "Hangfire Search"
+    "default_title": "Hangfire Job Filter"
     // "default_icon": "assets/img/icon128.png"
-  }
+  },
+  "web_accessible_resources": [
+    "assets/img/*.gif"    
+  ]
 }
