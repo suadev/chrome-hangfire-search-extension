@@ -1,6 +1,16 @@
-.loader-img{
+.loader-img {
     height: 16px;
     width: 16px;
     margin: 5px;
     visibility: hidden;
+}
+
+#search-box {
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#search-box-div {
+    text-align: center;
 }

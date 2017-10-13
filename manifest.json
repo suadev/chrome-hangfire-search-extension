@@ -5,7 +5,8 @@
   "description": "Hangfire Dashboard Search Extension",
   "version": "1.0",
   "permissions": [
-    "http://localhost/*"
+    "http://*/*jobs*",
+    "https://*/*jobs*"
   ],
   "background": {
     "scripts": [
