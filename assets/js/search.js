@@ -30,7 +30,7 @@ var jobSearcher = new function () {
         $(".table-responsive table").load(window.location.href.split('?')[0] + "?from=0&count=1000000 .table-responsive table",
         function() {            
             var table = $('.table-responsive').find('table');
-            var filtered = $(table).find('a[class=job-method]:contains('+ keyword +')').closest('tr');    
+            var filtered = $(".page-header").text() == "Recurring jobs" ? $(table).find('input.js-jobs-list-checkbox[value*='+ keyword + ']').closest('tr') :  $(table).find('a[class=job-method]:contains('+ keyword +')').closest('tr');    
             $(table).find('tbody tr').remove();
             $(table).find('tbody').append(filtered);
             $('.loader-img, .btn-toolbar').css('visibility', 'hidden');
