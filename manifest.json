@@ -3,7 +3,7 @@
   "name": "Hangfire Job Filter",
   "short_name": "Hangfire Job Filter",
   "description": "Hangfire Dashboard Job Filter Extension",
-  "version": "1.0",
+  "version": "1.1",
   "permissions": [
     "http://*/*jobs*",
     "https://*/*jobs*"
