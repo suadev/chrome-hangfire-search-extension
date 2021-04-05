@@ -29,8 +29,26 @@ var jobSearcher = new function () {
         $('.loader-img').css('visibility', 'unset');        
         $(".table-responsive table").load(window.location.href.split('?')[0] + "?from=0&count=1000000 .table-responsive table",
         function() {            
-            var table = $('.table-responsive').find('table');
-            var filtered = $(".page-header").text() == "Recurring jobs" ? $(table).find('input.js-jobs-list-checkbox[value*='+ keyword + ']').closest('tr') :  $(table).find('a[class=job-method]:contains('+ keyword +')').closest('tr');    
+            var table = $('.table-responsive').find('table');            
+            var filtered = [];
+            if($(".page-header").text() == "Recurring jobs") {
+                filtered = $(table).find('input.js-jobs-list-checkbox[value*='+ keyword + ']').closest('tr');
+            }
+            else 
+            {
+                if($("div[class=list-group] .active")[0].innerText.startsWith("Failed"))
+                {
+                    $(table).find('a[class=job-method]:contains('+ keyword +')').each(function() {
+                        filtered += '<tr>' + $(this).closest('tr')[0].innerHTML + '</tr>';
+                        filtered += '<tr>' + $(this).closest('tr').next('tr')[0].innerHTML + '</tr>';
+                    });
+                }
+                else
+                {
+                    filtered = $(table).find('a[class=job-method]:contains('+ keyword +')').closest('tr');
+                }
+            }
+
             $(table).find('tbody tr').remove();
             $(table).find('tbody').append(filtered);
             $('.loader-img, .btn-toolbar').css('visibility', 'hidden');
