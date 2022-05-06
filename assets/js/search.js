@@ -30,18 +30,19 @@ var jobSearcher = new function () {
         $(".table-responsive table").load(window.location.href.split('?')[0] + "?from=0&count=1000000 .table-responsive table",
         function() {            
             var table = $('.table-responsive').find('table');            
-            var filtered = [];
-            if($(".page-header").text() == "Recurring jobs") {
-                filtered = $(table).find('input.js-jobs-list-checkbox[value*='+ keyword + ']').closest('tr');
+            var filtered = [],filteredCount;
+            if($(".navbar-nav li.active a").attr("href").indexOf("recurring")!==-1) {
+                filtered = $(table).find('td:contains('+keyword+')').closest('tr');
             }
             else 
             {
-                if($("div[class=list-group] .active")[0].innerText.startsWith("Failed"))
+                if($("div[class=list-group] .active").attr("href").indexOf("failed")!==-1)
                 {
                     $(table).find('a[class=job-method]:contains('+ keyword +')').each(function() {
-                        filtered += '<tr>' + $(this).closest('tr')[0].innerHTML + '</tr>';
-                        filtered += '<tr>' + $(this).closest('tr').next('tr')[0].innerHTML + '</tr>';
+                        filtered.push($(this).closest('tr'));
+                        filtered.push($(this).closest('tr').next('tr'));
                     });
+                    filteredCount=filtered.length/2;
                 }
                 else
                 {
@@ -52,7 +53,7 @@ var jobSearcher = new function () {
             $(table).find('tbody tr').remove();
             $(table).find('tbody').append(filtered);
             $('.loader-img, .btn-toolbar').css('visibility', 'hidden');
-            $('#total-items').text("Total Items: " + filtered.length);
+            $('#total-items').text("Total Items: " + (filteredCount?filteredCount:filtered.length));
         });  
     }
 }
