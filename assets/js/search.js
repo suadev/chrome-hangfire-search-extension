@@ -6,11 +6,11 @@ jQuery.expr[':'].contains = function(a, i, m) {
 var jobSearcher = new function () {
     var totalItems = "<p>Total Items: #</p>";
 
-    var createSearchBox = function () {        
+    var createSearchBox = function () {
         $('#search-box').closest('div').remove();
         $('.js-jobs-list').prepend('<div class="search-box-div">' +
                                        '<input type="text" id="search-box" placeholder="Filter by Job Name..."></input>' +
-                                       '<img class="loader-img" src ='+ chrome.extension.getURL("assets/img/loader.gif") +' />'+
+                                       '<img class="loader-img" src ='+ chrome.runtime.getURL("assets/img/loader.gif") +' />'+
                                        '<p id="total-items"></p>'+
                                    '</div>');
     }
@@ -18,23 +18,23 @@ var jobSearcher = new function () {
         createSearchBox();
     }
     this.BindEvents = function(){
-        $('#search-box').bind('change', function(e){   
+        $('#search-box').bind('change', function(e){
             if(this.value.length == 0)
                 window.location.reload();
             else
-                FilterJobs(this.value);            
+                FilterJobs(this.value);
         });
     }
-    function FilterJobs(keyword){      
-        $('.loader-img').css('visibility', 'unset');        
+    function FilterJobs(keyword){
+        $('.loader-img').css('visibility', 'unset');
         $(".table-responsive table").load(window.location.href.split('?')[0] + "?from=0&count=1000000 .table-responsive table",
-        function() {            
-            var table = $('.table-responsive').find('table');            
+        function() {
+            var table = $('.table-responsive').find('table');
             var filtered = [],filteredCount;
             if($(".navbar-nav li.active a").attr("href").indexOf("recurring")!==-1) {
                 filtered = $(table).find('td:contains('+keyword+')').closest('tr');
             }
-            else 
+            else
             {
                 if($("div[class=list-group] .active").attr("href").indexOf("failed")!==-1)
                 {
@@ -54,7 +54,7 @@ var jobSearcher = new function () {
             $(table).find('tbody').append(filtered);
             $('.loader-img, .btn-toolbar').css('visibility', 'hidden');
             $('#total-items').text("Total Items: " + (filteredCount?filteredCount:filtered.length));
-        });  
+        });
     }
 }
 jobSearcher.Init();

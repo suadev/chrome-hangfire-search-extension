@@ -1,24 +1,34 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Hangfire Job Filter",
   "short_name": "Hangfire Job Filter",
   "description": "Hangfire Dashboard Job Filter Extension",
-  "version": "1.1",
+  "version": "1.2",
   "permissions": [
+    "activeTab"
+  ],
+  "host_permissions": [
     "http://*/*jobs*",
     "https://*/*jobs*"
   ],
   "background": {
-    "scripts": [
-      "assets/js/background.js"
-    ],
-    "persistent": true
+    "service_worker": "assets/js/service-worker.js"
   },
-  "homepage_url": "http://github.com/suadev",
-  "browser_action": {
-    "default_title": "Hangfire Job Filter"    
+  "content_scripts": [
+    {
+      "matches": ["http://*/*jobs*", "https://*/*jobs*"],
+      "css": ["assets/css/styles.css"],
+      "js": ["assets/js/jquery.min.js", "assets/js/search.js"]
+    }
+  ],
+  "homepage_url": "https://github.com/suadev",
+  "action": {
+    "default_title": "Hangfire Job Filter"
   },
   "web_accessible_resources": [
-    "assets/img/*.gif"    
+    {
+      "resources": ["assets/img/*.gif"],
+      "matches": ["<all_urls>"]
+    }
   ]
 }
